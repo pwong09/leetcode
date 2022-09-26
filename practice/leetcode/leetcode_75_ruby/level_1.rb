@@ -1,3 +1,52 @@
+# Definition for singly-linked list.
+# class ListNode
+#     attr_accessor :val, :next
+#     def initialize(val = 0, _next = nil)
+#         @val = val
+#         @next = _next
+#     end
+# end
+# @param {ListNode} list1
+# @param {ListNode} list2
+# @return {ListNode}
+def merge_two_lists(list1, list2)
+  return list2 unless list1
+
+  return list1 unless list2
+
+  if list1.val < list2.val
+    temp = head = ListNode.new(list1.val)
+    list1 = list1.next
+  else
+    temp = head = ListNode.new(list2.val)
+    list2 = list2.next
+  end
+
+  while !list1.nil? && !list2.nil?
+    if list1.val < list2.val
+      temp.next = ListNode.new(list1.val)
+      list1 = list1.next
+    else
+      temp.next = ListNode.new(list2.val)
+      list2 = list2.next
+    end
+    temp = temp.next
+  end
+  # Add all the nodes in list1, if remaining
+  until list1.nil?
+    temp.next = ListNode.new(list1.val)
+    list1 = list1.next
+    temp = temp.next
+  end
+  # Add all the nodes in l2, if remaining
+  until list2.nil?
+    temp.next = ListNode.new(list2.val)
+    list2 = list2.next
+    temp = temp.next
+  end
+  head
+end
+
 # @param {String} s
 # @param {String} t
 # @return {Boolean}
