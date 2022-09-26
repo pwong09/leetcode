@@ -1,3 +1,35 @@
+# @param {String} s
+# @param {String} t
+# @return {Boolean}
+def subsequence?(s, t)
+  s_len = s.length
+  t_len = t.length
+  i = 0
+  j = 0
+  while i < s_len && j < t_len
+    i += 1 if s[i] == t[j]
+    j += 1
+  end
+  i == s_len
+end
+
+# @param {String} s
+# @param {String} t
+# @return {Boolean}
+def isomorphic?(s, t)
+  return false if s.length != t.length
+
+  map = {}
+  (0...s.length).each do |i|
+    x = s[i]
+    y = t[i]
+    map["s #{x}"] = y unless map["s #{x}"]
+    map["t #{y}"] = x unless map["t #{y}"]
+    return false if y != map["s #{x}"] || x != map["t #{y}"]
+  end
+  true
+end
+
 # @param {Integer[]} nums
 # @return {Integer[]}
 def running_sum(nums)
