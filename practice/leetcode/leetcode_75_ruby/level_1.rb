@@ -6,6 +6,41 @@
 #         @next = _next
 #     end
 # end
+# @param {ListNode} head
+# @return {ListNode}
+def reverse_list(head)
+  return [] unless head
+
+  temp = ListNode.new(head.val)
+  array = [head.val]
+  head = head.next
+
+  until head.nil?
+    temp.next = ListNode.new(head.val)
+    array.push(head.val)
+    head = head.next
+  end
+  array.reverse!
+end
+# Refactor
+# prev = nil
+# curr = head
+# until curr.nil?
+#   temp = curr.next
+#   curr.next = prev
+#   prev = curr
+#   curr = temp
+# end
+# prev
+
+# Definition for singly-linked list.
+# class ListNode
+#     attr_accessor :val, :next
+#     def initialize(val = 0, _next = nil)
+#         @val = val
+#         @next = _next
+#     end
+# end
 # @param {ListNode} list1
 # @param {ListNode} list2
 # @return {ListNode}
