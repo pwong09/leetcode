@@ -1,3 +1,63 @@
+# 409 Longest Palindrome
+# @param {String} s
+# @return {Integer}
+def longest_palindrome(str)
+  return 1 if str.length == 1
+
+  # map out number of each character
+  letters = {}
+  # populate hash with letter => count
+  str.chars.each do |c|
+    !letters[c] ? letters[c] = 1 : letters[c] += 1
+  end
+
+  result = 0
+  odd = 0
+
+  letters.each_value do |char|
+    if char > 1
+      if char.even?
+        result += char
+      else
+        result += char - 1
+        odd += 1
+      end
+    else
+      odd += 1
+    end
+  end
+  result += 1 if odd.positive?
+
+  result
+end
+# refactor
+# def longest_palindrome(str)
+#   t = Set.new
+#   ans = 0
+#   str.chars.each do |c|
+#     if t.include?(c)
+#       t.delete(c)
+#       ans += 2
+#     else
+#       t << c
+#     end
+#   end
+#   ans == str.length ? ans : ans + 1
+# end
+# def longest_palindrome(s)
+#   hist = s.chars.each_with_object({}) do |x, obj|
+#     obj[x] ||= 0
+#     obj[x] += 1
+#   end
+#   odd_flag = false
+#   sum = hist.values.sum do |x|
+#     odd_flag = true if odd_flag || x.odd?
+#     x.odd? ? x - 1 : x
+#   end
+#   odd_flag ? sum + 1 : sum
+# end
+
+# 121 Best Time to Buy and Sell Stock
 # @param {Integer[]} prices
 # @return {Integer}
 def max_profit(prices)
@@ -41,6 +101,7 @@ end
 #   prof
 # end
 
+# 876 Middle of the Linked List
 # Definition for singly-linked list.
 # class ListNode
 #     attr_accessor :val, :next
@@ -76,6 +137,7 @@ def middle_node(head)
   slow
 end
 
+# 206 Reverse Linked List
 # Definition for singly-linked list.
 # class ListNode
 #     attr_accessor :val, :next
@@ -113,6 +175,7 @@ def reverse_list(head)
   prev
 end
 
+# 21 Merge Two Sorted Lists
 # Definition for singly-linked list.
 # class ListNode
 #     attr_accessor :val, :next
@@ -162,6 +225,7 @@ def merge_two_lists(list1, list2)
   head
 end
 
+# 392 Is Subsequence
 # @param {String} s
 # @param {String} t
 # @return {Boolean}
@@ -177,6 +241,7 @@ def subsequence?(s, t)
   i == s_len
 end
 
+# 205 Isomorphic Strings
 # @param {String} s
 # @param {String} t
 # @return {Boolean}
@@ -194,6 +259,7 @@ def isomorphic?(s, t)
   true
 end
 
+# 1480 Running Sum of 1d Array
 # @param {Integer[]} nums
 # @return {Integer[]}
 def running_sum(nums)
@@ -210,6 +276,7 @@ end
 # total = 0
 # nums.map { |number| total += number }
 
+# 724 Find Pivot Index
 # @param {Integer[]} nums
 # @return {Integer}
 def pivot_index(nums)
