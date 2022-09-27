@@ -1,3 +1,46 @@
+# @param {Integer[]} prices
+# @return {Integer}
+def max_profit(prices)
+  profit = 0
+  buy = prices.first
+  prices.each do |price|
+    buy = price if price < buy
+    sell = price
+    new_profit = sell - buy
+    profit = new_profit if new_profit > profit
+  end
+  profit
+end
+# refactor
+# def max_profit(prices)
+#   return 0 if prices.empty?
+
+#   max_profit = 0
+#   min_price = prices[0]
+
+#   prices.each do |price|
+#     min_price = [min_price, price].min
+#     max_profit = [max_profit, price - min_price].max
+#   end
+
+#   max_profit
+# end
+# def max_profit(prices)
+#   buy = prices[0]
+#   prof = 0
+#   i = 0
+#   while i < prices.size
+#     if prices[i] < buy
+#       buy = prices[i]
+#     else
+#       new_prof = prices[i] - buy
+#       prof = [prof, new_prof].max
+#     end
+#     i += 1
+#   end
+#   prof
+# end
+
 # Definition for singly-linked list.
 # class ListNode
 #     attr_accessor :val, :next
@@ -8,30 +51,67 @@
 # end
 # @param {ListNode} head
 # @return {ListNode}
-def reverse_list(head)
-  return [] unless head
+# def middle_node(head)
+#   return head if head.next == nil
 
-  temp = ListNode.new(head.val)
-  array = [head.val]
-  head = head.next
+#   temp = ListNode.new(head.val)
+#   array = [head.val]
+#   head = head.next
 
-  until head.nil?
-    temp.next = ListNode.new(head.val)
-    array.push(head.val)
-    head = head.next
-  end
-  array.reverse!
-end
-# Refactor
-# prev = nil
-# curr = head
-# until curr.nil?
-#   temp = curr.next
-#   curr.next = prev
-#   prev = curr
-#   curr = temp
+#   until head.nil?
+#     temp.next = ListNode.new(head.val)
+#     array.push(head.val)
+#     head = head.next
+#   end
+#   middle_index = (array.length / 2).to_i
+#   array.slice(middle_index, array.length - 1)
 # end
-# prev
+# refactor
+def middle_node(head)
+  slow = fast = head
+  while !fast.nil? && !fast.next.nil?
+    slow = slow.next # half speed of fast
+    fast = fast.next.next
+  end
+  slow
+end
+
+# Definition for singly-linked list.
+# class ListNode
+#     attr_accessor :val, :next
+#     def initialize(val = 0, _next = nil)
+#         @val = val
+#         @next = _next
+#     end
+# end
+# @param {ListNode} head
+# @return {ListNode}
+# def reverse_list(head)
+#   return [] unless head
+
+#   temp = ListNode.new(head.val)
+#   array = [head.val]
+#   head = head.next
+
+#   until head.nil?
+#     temp.next = ListNode.new(head.val)
+#     array.push(head.val)
+#     head = head.next
+#   end
+#   array.reverse!
+# end
+# Refactor
+def reverse_list(head)
+  prev = nil
+  curr = head
+  until curr.nil?
+    temp = curr.next
+    curr.next = prev
+    prev = curr
+    curr = temp
+  end
+  prev
+end
 
 # Definition for singly-linked list.
 # class ListNode
