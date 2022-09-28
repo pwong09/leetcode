@@ -1,3 +1,44 @@
+# 589. N-ary Tree Preorder Traversal
+# Definition for a Node.
+# class Node
+#     attr_accessor :val, :children
+#     def initialize(val)
+#         @val = val
+#         @children = []
+#     end
+# end
+
+# @param {Node} root, {List}
+# @return {List[int]}
+# recursive
+# def preorder(root, traverse = [])
+#   return traverse unless root
+
+#   traverse.push(root.val)
+#   root.children.each do |child|
+#     preorder(child, traverse)
+#   end
+#   traverse
+# end
+# refactor - iterative
+def preorder(root)
+  return [] unless root # edge-case -> no root presented
+
+  ans = [] # what we will return (where we store the values)
+  stack = [root] # we will use an Array functioning as a Stack, and add the Root to it
+  while stack[0] # While there is anything in the Stack, keep looping
+    current = stack.pop # pull the last node entered into the stack off and store it in the 'current' variable
+    ans.push(current.val) # add the value of the Node to the final array we will return
+    temp = [] # create a temporary array to store the children nodes
+    current.children.each { |x| temp.unshift(x) }
+    # add these children nodes to the FRONT of the temp array
+    temp.each { |x| stack.push(x) } # since we stored the children nodes in reverse order, now add them to the Stack
+    # keep doing this until the Stack array is empty
+  end
+  ans
+end
+
+#########################################
 # 409 Longest Palindrome
 # @param {String} s
 # @return {Integer}
@@ -57,6 +98,7 @@ end
 #   odd_flag ? sum + 1 : sum
 # end
 
+#########################################
 # 121 Best Time to Buy and Sell Stock
 # @param {Integer[]} prices
 # @return {Integer}
@@ -101,6 +143,7 @@ end
 #   prof
 # end
 
+#########################################
 # 876 Middle of the Linked List
 # Definition for singly-linked list.
 # class ListNode
@@ -137,6 +180,7 @@ def middle_node(head)
   slow
 end
 
+#########################################
 # 206 Reverse Linked List
 # Definition for singly-linked list.
 # class ListNode
@@ -175,6 +219,7 @@ def reverse_list(head)
   prev
 end
 
+#########################################
 # 21 Merge Two Sorted Lists
 # Definition for singly-linked list.
 # class ListNode
@@ -225,6 +270,7 @@ def merge_two_lists(list1, list2)
   head
 end
 
+#########################################
 # 392 Is Subsequence
 # @param {String} s
 # @param {String} t
@@ -259,6 +305,7 @@ def isomorphic?(s, t)
   true
 end
 
+#########################################
 # 1480 Running Sum of 1d Array
 # @param {Integer[]} nums
 # @return {Integer[]}
