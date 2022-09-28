@@ -1,0 +1,41 @@
+# @param {String} dominoes
+# @return {String}
+def push_dominoes(dominoes)
+  prev = nil
+  index = nil
+  str = dominoes
+  size = str.size
+  return str if size == 1
+
+  str.chars.each_with_index do |c, i|
+    if c == '.'
+      index = i if index.nil?
+      next unless size == i + 1 && prev == 'R'
+
+      (index..i).each do |e|
+        str[e] = 'R'
+      end
+    elsif c == 'L' && prev != 'R' && !index.nil?
+      (index..i).each do |j|
+        str[j] = 'L'
+      end
+      index = nil
+    elsif c == 'L' && prev == 'R' && !index.nil?
+      ((index..(i - 1)).count / 2).times do |j|
+        str[index + j] = 'R'
+        str[i - j - 1] = 'L'
+      end
+      index = nil
+    elsif c == 'R' && prev == 'R' && !index.nil?
+      (index..i).each do |e|
+        str[e] = 'R'
+      end
+      index = nil
+    elsif c == 'R'
+      index = nil
+    end
+
+    prev = c
+  end
+  str
+end
