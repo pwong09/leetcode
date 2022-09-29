@@ -16,8 +16,8 @@ def remove_nth_from_end(head, n)
   n.times { fast = fast.next }
   return head.next unless fast
 
-  while fast.next 
-    fast = fast.next 
+  while fast.next
+    fast = fast.next
     slow = slow.next
   end
   slow.next = slow.next.next

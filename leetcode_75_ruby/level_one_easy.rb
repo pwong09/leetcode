@@ -1,3 +1,79 @@
+#########################################
+# DAY 7
+#########################################
+# 278 First Bad Version
+# The is_bad_version API is already defined for you.
+# @param {Integer} version
+# @return {boolean} whether the version is bad
+# def is_bad_version(version):
+
+# @param {Integer} n
+# @return {Integer}
+def first_bad_version(n)
+  return n if n == 1
+
+  lower_bound = 1
+  upper_bound = n
+  bad = n
+
+  while lower_bound <= upper_bound
+    midpoint = ((lower_bound + upper_bound) / 2).to_i
+
+    if is_bad_version(midpoint)
+      # search left half
+      bad = [bad, midpoint].min
+      upper_bound = midpoint - 1
+    else
+      # search right half for bad version
+      lower_bound = midpoint + 1
+    end
+  end
+  bad
+end
+# linear would take too long
+# [*1..n].each { |ver| return ver if is_bad_version(ver) }
+# one-liner with ruby method
+# (1..n).bsearch { |i| is_bad_version(i) }
+# recursion
+# def first_bad_version(n, p = 0)
+#   return n if n == p
+
+#   t = ( p + n ) / 2
+#   is_bad_version(t) ? first_bad_version(t, p) : first_bad_version(n, t + 1)
+# end
+
+#########################################
+# 704 Binary Search
+# @param {Integer[]} nums
+# @param {Integer} target
+# @return {Integer}
+def search(nums, target)
+  lower_bound = 0
+  upper_bound = nums.length - 1
+  while lower_bound <= upper_bound
+    midpoint = ((lower_bound + upper_bound) / 2).to_i
+    midpoint_value = nums[midpoint]
+    return midpoint if midpoint_value == target
+
+    if target < midpoint_value # only search left half
+      upper_bound = midpoint - 1
+    else # only search right half
+      lower_bound = midpoint + 1
+    end
+  end
+  -1
+end
+# linear search method
+# def search(nums, target)
+#   nums.each_with_index do |num, idx|
+#     return idx if num == target
+#   end
+#   -1
+# end
+
+#########################################
+# DAY 6 - PART 1
+#########################################
 # 589. N-ary Tree Preorder Traversal
 # Definition for a Node.
 # class Node
@@ -38,6 +114,8 @@ def preorder(root)
   ans
 end
 
+#########################################
+# DAY 5
 #########################################
 # 409 Longest Palindrome
 # @param {String} s
@@ -144,6 +222,8 @@ end
 # end
 
 #########################################
+# DAY 4 - PART 1
+#########################################
 # 876 Middle of the Linked List
 # Definition for singly-linked list.
 # class ListNode
@@ -180,6 +260,8 @@ def middle_node(head)
   slow
 end
 
+#########################################
+# DAY 3
 #########################################
 # 206 Reverse Linked List
 # Definition for singly-linked list.
@@ -271,6 +353,8 @@ def merge_two_lists(list1, list2)
 end
 
 #########################################
+# DAY 2
+#########################################
 # 392 Is Subsequence
 # @param {String} s
 # @param {String} t
@@ -305,6 +389,8 @@ def isomorphic?(s, t)
   true
 end
 
+#########################################
+# DAY 1
 #########################################
 # 1480 Running Sum of 1d Array
 # @param {Integer[]} nums
