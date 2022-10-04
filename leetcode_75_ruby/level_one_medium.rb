@@ -1,4 +1,39 @@
 #########################################
+# DAY 8
+#########################################
+# 235. Lowest Common Ancestor of a Binary Search Tree
+
+# 98 Validate Binary Search Tree
+# Definition for a binary tree node.
+# class TreeNode
+#     attr_accessor :val, :left, :right
+#     def initialize(val = 0, left = nil, right = nil)
+#         @val = val
+#         @left = left
+#         @right = right
+#     end
+# end
+# @param {TreeNode} root
+# @return {Boolean}
+def is_valid_bst(root)
+  @results = []
+
+  def traverse(tree)
+    return nil unless tree
+
+    traverse(tree.left) if tree.left
+    @results.push(tree.val) unless tree.val.nil?
+    traverse(tree.right) if tree.right
+  end
+
+  traverse(root)
+
+  @results.each_with_index { |x, i| return false if @results[i + 1] && x >= @results[i + 1] }
+
+  true
+end
+
+#########################################
 # DAY 6 - PART 2
 #########################################
 # 102 Binary Tree Level Order Traversal
