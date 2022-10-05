@@ -1,4 +1,37 @@
 #########################################
+# DAY 10
+#########################################
+# 509. Fibonacci Number
+# @param {Integer} n
+# @return {Integer}
+# recursive solution - easy to read but slow O(N^2)
+def fib(n)
+  return if n.negative?
+  # base case
+  return n if n.zero? || n == 1
+
+  fib(n - 1) + fib(n - 2)
+end
+
+# non-recursive solution - faster O(n) & uses less space O(1)
+def fib(n)
+  return if n.negative?
+  return 0 if n.zero?
+  return 1 if n == 1
+
+  # base case
+  a = 0
+  b = 1
+  value = 0
+  (2..n).each do
+    value = a + b
+    a = b
+    b = value
+  end
+  value
+end
+
+#########################################
 # DAY 7
 #########################################
 # 278 First Bad Version
