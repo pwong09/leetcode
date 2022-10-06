@@ -1,17 +1,33 @@
 #########################################
 # DAY 10
 #########################################
+# 70. Climbing Stairs
+# @param {Integer} n
+# @return {Integer}
+def climb_stairs(n)
+  p = 1
+  q = 1
+
+  (n - 1).times do
+    temp = q
+    q += p
+    p = temp
+  end
+
+  q
+end
+
 # 509. Fibonacci Number
 # @param {Integer} n
 # @return {Integer}
 # recursive solution - easy to read but slow O(N^2)
-def fib(n)
-  return if n.negative?
-  # base case
-  return n if n.zero? || n == 1
+# def fib(n)
+#   return if n.negative?
+#   # base case
+#   return n if n.zero? || n == 1
 
-  fib(n - 1) + fib(n - 2)
-end
+#   fib(n - 1) + fib(n - 2)
+# end
 
 # non-recursive solution - faster O(n) & uses less space O(1)
 def fib(n)
@@ -30,6 +46,50 @@ def fib(n)
   end
   value
 end
+
+#########################################
+# DAY 9 - Part 1
+#########################################
+# 733. Flood Fill
+# @param {Integer[][]} image
+# @param {Integer} sr
+# @param {Integer} sc
+# @param {Integer} color
+# @return {Integer[][]}
+def flood_fill(image, sr, sc, color)
+  old_color = image[sr][sc]
+  return image if old_color == color
+
+  fill(image, sr, sc, color, old_color)
+  image
+end
+
+def fill(image, sr, sc, new_color, old_color)
+  return unless image[sr][sc] == old_color
+
+  image[sr][sc] = new_color
+  # top
+  fill(image, sr - 1, sc, new_color, old_color) if sr >= 1
+  # bottom
+  fill(image, sr + 1, sc, new_color, old_color) if sr + 1 < image.length
+  # left
+  fill(image, sr, sc - 1, new_color, old_color) if sc >= 1
+  # right
+  fill(image, sr, sc + 1, new_color, old_color) if sc + 1 < image[0].length
+end
+
+# refactor
+# def flood_fill(image, sr, sc, new_color)
+#   color = image[sr][sc]
+#   image[sr][sc] = new_color
+#   return image if color == new_color # if no painting req
+
+#   flood_fill(image, sr - 1, sc, new_color) if sr.positive? && image[sr - 1][sc] == color
+#   flood_fill(image, sr, sc - 1, new_color) if sc.positive? && image[sr][sc - 1] == color
+#   flood_fill(image, sr + 1, sc, new_color) if sr + 1 < image.size && image[sr + 1][sc] == color
+#   flood_fill(image, sr, sc + 1, new_color) if sc + 1 < image[0].size && image[sr][sc + 1] == color
+#   image
+# end
 
 #########################################
 # DAY 7
