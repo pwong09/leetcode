@@ -1,4 +1,45 @@
 #########################################
+# DAY 9 - Part 2
+#########################################
+# 200 Number of Islands
+# @param {Character[][]} grid
+# @return {Integer}
+def num_islands(grid)
+  number_of_islands = 0
+  rows = grid.length - 1
+  cols = grid[0].length - 1
+
+  grid.each_with_index do |row, row_index|
+    row.each_with_index do |col, col_index|
+      if col == '1'
+        number_of_islands += 1
+        depth_first_search(grid, rows, cols, row_index, col_index)
+      end
+    end
+  end
+
+  number_of_islands
+end
+
+def depth_first_search(grid, rows, cols, row_index, col_index)
+  return if row_index > rows || col_index > cols || row_index.negative? || col_index.negative?
+
+  node = grid[row_index][col_index]
+
+  return if node == '0'
+
+  grid[row_index][col_index] = '0'
+
+  # look up
+  depth_first_search(grid, rows, cols, row_index - 1, col_index)
+  # look down
+  depth_first_search(grid, rows, cols, row_index + 1, col_index)
+  # look right
+  depth_first_search(grid, rows, cols, row_index, col_index + 1)
+  # look left
+  depth_first_search(grid, rows, cols, row_index, col_index - 1)
+end
+#########################################
 # DAY 8
 #########################################
 # 235. Lowest Common Ancestor of a Binary Search Tree
