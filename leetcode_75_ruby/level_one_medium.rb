@@ -1,3 +1,22 @@
+# 62 Unique Paths
+# @param {Integer} m
+# @param {Integer} n
+# @return {Integer}
+
+
+# brute force approach - times out
+# def unique_paths(m, n)
+#   backtrack(0, 0, m, n)
+# end
+
+# def backtrack(r, c, m, n)
+#   return 1 if r == m - 1 && c == n - 1
+
+#   return 0 if r >= m || c >= n
+
+#   backtrack(r + 1, c, m, n) + backtrack(r, c + 1, m, n)
+# end
+
 #########################################
 # DAY 9 - Part 2
 #########################################

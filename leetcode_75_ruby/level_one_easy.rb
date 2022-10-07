@@ -1,4 +1,24 @@
 #########################################
+# DAY 11 - Part 1
+#########################################
+# 746. Min Cost Climbing Stairs
+# @param {Integer[]} cost
+# @return {Integer}
+def min_cost_climbing_stairs(cost)
+  cur = 0
+  c1 = cur + cost[0]
+  c2 = cur + cost[1]
+
+  for i in 2...cost.length
+    cur = cost[i] + [c1, c2].min
+    c1 = c2
+    c2 = cur
+  end
+
+  [c1, c2].min
+end
+
+#########################################
 # DAY 10
 #########################################
 # 70. Climbing Stairs
