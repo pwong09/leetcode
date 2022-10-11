@@ -1,3 +1,23 @@
+# 83. Remove Duplicates from Sorted List
+# Definition for singly-linked list.
+# class ListNode
+#     attr_accessor :val, :next
+#     def initialize(val = 0, _next = nil)
+#         @val = val
+#         @next = _next
+#     end
+# end
+# @param {ListNode} head
+# @return {ListNode}
+def delete_duplicates(head)
+  return head if head.nil? || head.next.nil?
+
+  temp = head
+
+  temp.val == temp.next.val ? temp.next = temp.next.next : temp = temp.next until temp.next.nil?
+  head
+end
+
 # 412 Fizz Buzz
 # @param {Integer} n
 # @return {String[]}
