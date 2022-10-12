@@ -1,3 +1,18 @@
+# 976 Largest Perimeter Triangle
+# @param {Integer[]} nums
+# @return {Integer}
+def largest_perimeter(nums)
+  nums = nums.sort.reverse
+  use_length = nums.length - 3
+
+  for i in 0..use_length do
+    if nums[i + 2] + nums[i + 1] > nums[i]
+      return nums[i + 2] + nums[i + 1] + nums[i]
+    end
+  end
+
+  0
+end
 # 83. Remove Duplicates from Sorted List
 # Definition for singly-linked list.
 # class ListNode
@@ -15,6 +30,7 @@ def delete_duplicates(head)
   temp = head
 
   temp.val == temp.next.val ? temp.next = temp.next.next : temp = temp.next until temp.next.nil?
+
   head
 end
 
