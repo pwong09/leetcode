@@ -34,6 +34,47 @@ def delete_duplicates(head)
   head
 end
 
+# 141 Linked List Cycle
+# Definition for singly-linked list.
+# class ListNode
+#     attr_accessor :val, :next
+#     def initialize(val)
+#         @val = val
+#         @next = nil
+#     end
+# end
+
+# @param {ListNode} head
+# @return {Boolean}
+def hasCycle(head)
+  return false if !head || head.next.nil?
+
+  seen_nodes = {}
+  temp = head
+
+  until temp.next.nil?
+    return true if seen_nodes[temp]
+
+    seen_nodes[temp] = true
+    temp = temp.next
+  end
+  false
+end
+# refactor
+def cycle?(head)
+  return false if !head || head.next.nil?
+
+  slow = head
+  fast = head.next
+
+  while fast&.next
+    slow = slow.next
+    fast = fast.next.next
+    return true if slow == fast
+  end
+  false
+end
+
 # 412 Fizz Buzz
 # @param {Integer} n
 # @return {String[]}
