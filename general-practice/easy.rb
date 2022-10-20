@@ -103,6 +103,69 @@ def remove_elements(head, val)
   head
 end
 
+# 234 Palindrome Linked List
+# Definition for singly-linked list.
+# class ListNode
+#     attr_accessor :val, :next
+#     def initialize(val = 0, _next = nil)
+#         @val = val
+#         @next = _next
+#     end
+# end
+# @param {ListNode} head
+# @return {Boolean}
+def is_palindrome(head)
+  data = []
+  current_node = head
+  until current_node.nil?
+    data << current_node.val
+    current_node = current_node.next
+  end
+  data == data.reverse
+end
+
+# using slow and fast pointers
+def palindrome?(head)
+  return true if head.nil?
+
+  slow = fast = head
+
+  # Traverse till the middle of the list using slow and fast pointer
+  # When fast reaches the end, slow pointer will be at the middle of the list
+  until fast&.next.nil?
+    fast = fast.next.next
+    slow = slow.next
+  end
+
+  # Reverse the slow pointer
+  slow = reverse(slow)
+
+  # compare slow with head val by val
+  # if any one of them is not matching
+  # then they aren't palindrome.
+  current = head
+  until slow.nil?
+    return false if current.val != slow.val
+
+    current = current.next
+    slow = slow.next
+  end
+  true
+end
+
+# returns a reversed linkedlist.
+def reverse(node)
+  prev = nil
+
+  until node.nil?
+    next_node = node.next
+    node.next = prev
+    prev = node
+    node = next_node
+  end
+  prev
+end
+
 # 412 Fizz Buzz
 # @param {Integer} n
 # @return {String[]}
@@ -146,6 +209,62 @@ def number_of_steps(num)
     steps += 1
   end
   steps
+end
+
+# 1351 Count Negative Numbers in a Sorted Matrix
+# @param {Integer[][]} grid
+# @return {Integer}
+def count_negatives(grid)
+  count = 0
+
+  grid.each do |row|
+    row.each do |col|
+      count += 1 if col.negative?
+    end
+  end
+
+  count
+end
+
+# binary search approach
+def negative_counts(grid)
+  cols = grid[0].length
+  count = 0
+
+  grid.each do |rows|
+    # if starting index of a row is negative
+    # then entire row will be negative
+    if rows[0].negative?
+      count += cols
+      next
+    end
+
+    # if last index of a row is positive
+    # then there are no negative integers in that row
+    next if (rows[cols - 1]).positive?
+
+    left = 0
+    right = cols - 1
+
+    while left <= right
+      midpoint = (left + right) / 2
+
+      # if the number at rows[midpoint] is negative
+      if rows[midpoint].negative?
+        # check if midpoint itself is zero index or if the value left of midpoint is zero or positive
+        if midpoint.zero? || rows[midpoint - 1] >= 0
+          count += (cols - midpoint)
+          break
+        end
+
+        right = midpoint - 1
+      else
+        left = midpoint + 1
+      end
+    end
+  end
+
+  count
 end
 
 # 1672. Richest Customer Wealth
