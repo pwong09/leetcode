@@ -75,6 +75,34 @@ def cycle?(head)
   false
 end
 
+# 203 Remove Linked List Elements
+# Definition for singly-linked list.
+# class ListNode
+#     attr_accessor :val, :next
+#     def initialize(val = 0, _next = nil)
+#         @val = val
+#         @next = _next
+#     end
+# end
+# @param {ListNode} head
+# @param {Integer} val
+# @return {ListNode}
+def remove_elements(head, val)
+  return nil if head.nil?
+
+  node = head
+  until node.next.nil?
+    if node.next.val == val
+      node.next = node.next.next
+    else
+      node = node.next
+    end
+  end
+  head = head.next if head.val == val
+
+  head
+end
+
 # 412 Fizz Buzz
 # @param {Integer} n
 # @return {String[]}
