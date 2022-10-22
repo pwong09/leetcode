@@ -1,19 +1,36 @@
-# 976 Largest Perimeter Triangle
+# 1 Two Sum
 # @param {Integer[]} nums
-# @return {Integer}
-def largest_perimeter(nums)
-  nums = nums.sort.reverse
-  use_length = nums.length - 3
+# @param {Integer} target
+# @return {Integer[]}
+def two_sum(nums, target)
+  numbers = {}
+  nums.each_with_index do |num, i|
+    diff = target - num
 
-  for i in 0..use_length do
-    if nums[i + 2] + nums[i + 1] > nums[i]
-      return nums[i + 2] + nums[i + 1] + nums[i]
-    end
+    return [numbers[diff], i] if numbers[diff]
+
+    numbers[num] = i
   end
-
-  0
 end
-# 83. Remove Duplicates from Sorted List
+
+# naive approach, time limit exceeded
+# def two_sum(nums, target)
+#   return if nums.nil?
+
+#   indices = []
+
+#   for i in 0...nums.length
+#     for j in (i + 1)...nums.length
+#       if nums[i] + nums[j] == target
+#         indices.push(i, j)
+#         break
+#       end
+#     end
+#   end
+#   indices
+# end
+
+# 83 Remove Duplicates from Sorted List
 # Definition for singly-linked list.
 # class ListNode
 #     attr_accessor :val, :next
@@ -209,6 +226,22 @@ def number_of_steps(num)
     steps += 1
   end
   steps
+end
+
+# 976 Largest Perimeter Triangle
+# @param {Integer[]} nums
+# @return {Integer}
+def largest_perimeter(nums)
+  nums = nums.sort.reverse
+  use_length = nums.length - 3
+
+  for i in 0..use_length do
+    if nums[i + 2] + nums[i + 1] > nums[i]
+      return nums[i + 2] + nums[i + 1] + nums[i]
+    end
+  end
+
+  0
 end
 
 # 1351 Count Negative Numbers in a Sorted Matrix
