@@ -2,6 +2,7 @@
 # @param {Integer[]} nums
 # @param {Integer} target
 # @return {Integer[]}
+# using a hash to keep track
 def two_sum(nums, target)
   numbers = {}
   nums.each_with_index do |num, i|
@@ -298,6 +299,14 @@ def negative_counts(grid)
   end
 
   count
+end
+
+# 1662 Check If Two String Arrays are Equivalent
+# @param {String[]} word1
+# @param {String[]} word2
+# @return {Boolean}
+def array_strings_are_equal(word1, word2)
+  word1.join == word2.join
 end
 
 # 1672. Richest Customer Wealth
