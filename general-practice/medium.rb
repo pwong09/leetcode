@@ -1,3 +1,40 @@
+# 92 Reverse Linked List II
+# Definition for singly-linked list.
+# class ListNode
+#     attr_accessor :val, :next
+#     def initialize(val = 0, _next = nil)
+#         @val = val
+#         @next = _next
+#     end
+# end
+# @param {ListNode} head
+# @param {Integer} left
+# @param {Integer} right
+# @return {ListNode}
+def reverse_between(head, m, n)
+  if m == 1
+    reverse(head, n - m + 1)
+  else
+    p = head
+    (m - 2).times { p = p.next }
+    p.next = reverse(p.next, n - m + 1)
+    head
+  end
+end
+
+def reverse(head, c)
+  prev = head
+  c.times { prev = prev.next }
+  current = head
+  c.times do
+    temp = current.next
+    current.next = prev
+    prev = current
+    current = temp
+  end
+  prev
+end
+
 # 817. Linked List Components
 # Definition for singly-linked list.
 # class ListNode
