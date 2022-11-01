@@ -93,6 +93,37 @@ def cycle?(head)
   false
 end
 
+# 160 Intersection of Two Linked Lists
+# Definition for singly-linked list.
+# class ListNode
+#     attr_accessor :val, :next
+#     def initialize(val)
+#         @val = val
+#         @next = nil
+#     end
+# end
+
+# @param {ListNode} headA
+# @param {ListNode} headB
+# @return {ListNode}
+def get_intersection_node(head_a, head_b)
+  return nil if head_a.nil? || head_b.nil?
+
+  seen_nodes = {}
+
+  until head_a.nil?
+    seen_nodes[head_a] = head_a.val unless seen_nodes[head_a]
+    head_a = head_a.next
+  end
+  until head_b.nil?
+    return head_b if seen_nodes[head_b]
+
+    head_b = head_b.next
+  end
+
+  nil
+end
+
 # 203 Remove Linked List Elements
 # Definition for singly-linked list.
 # class ListNode
