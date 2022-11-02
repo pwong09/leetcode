@@ -244,6 +244,39 @@ def fizz_buzz(n)
   end
 end
 
+# 599 Minimum Index Sum of Two Lists
+# @param {String[]} list1
+# @param {String[]} list2
+# @return {String[]}
+def find_restaurant(list1, list2)
+  common = list1 & list2
+
+  hash = {}
+
+  common.each { |x| hash[x] = list1.index(x) + list2.index(x) }
+
+  hash.select { |_, v| v == hash.values.min }.keys
+end
+
+# initial iterative approach
+# time limit exceeded
+def find_restaurant_iterative(list1, list2)
+  result = []
+  dict = {}
+
+  list1.each_with_index do |word, i|
+    list2.each_with_index do |str, j|
+      if word == str
+        index_sum = i + j
+        dict[word] = index_sum
+      end
+    end
+  end
+
+  dict.each_pair { |k, v| result.push(k) if v == dict.values.min }
+  result
+end
+
 # 1342. Number of Steps to Reduce a Number to Zero
 # @param {Integer} num
 # @return {Integer}
