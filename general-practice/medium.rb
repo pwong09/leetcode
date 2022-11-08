@@ -35,6 +35,50 @@ def reverse(head, c)
   prev
 end
 
+# 433 Minimum Genetic Mutation
+# @param {String} start
+# @param {String} end
+# @param {String[]} bank
+# @return {Integer}
+def min_mutation(start, last, bank)
+  return -1 if bank.empty?
+
+  @dict = Hash.new { |h, k| h[k] = [] }
+  q = [[start, 0]]
+  visited = []
+
+  bank.each { |gene| transform(gene) }
+
+  l = until q.empty?
+        gene, level = q.shift
+        next if visited.include?(gene)
+        return level if gene == last
+
+        visited << gene
+        steps = transform(gene)
+
+        neighbours = steps.map { |step| @dict[step] }.compact.flatten
+        neighbours.each { |n| q << [n, level + 1] }
+      end
+
+  l || -1
+end
+
+def transform(gene)
+  res = []
+  i = 0
+
+  while i < gene.size
+    new_gene = gene.dup
+    new_gene[i] = '*'
+    @dict[new_gene] << gene
+    res << new_gene
+    i += 1
+  end
+
+  res
+end
+
 # 817. Linked List Components
 # Definition for singly-linked list.
 # class ListNode

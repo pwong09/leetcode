@@ -365,6 +365,27 @@ def negative_counts(grid)
   count
 end
 
+# 1544 Make the string great
+# @param {String} s
+# @return {String}
+def make_good(str)
+  str = str.chars
+  change = true
+  while change
+    change = false
+    (0...str.size - 1).each do |i|
+      a = str[i]
+      b = str[i + 1]
+      if (a != b) && (a.upcase == b || b.upcase == a)
+        str = str[0...i] + str[(i + 2)..]
+        change = true
+        break
+      end
+    end
+  end
+  str.join
+end
+
 # 1662 Check If Two String Arrays are Equivalent
 # @param {String[]} word1
 # @param {String[]} word2
