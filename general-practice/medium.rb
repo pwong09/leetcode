@@ -92,9 +92,8 @@ end
 # @param {Integer[]} nums
 # @return {Integer}
 def num_components(head, g)
-  g = g.reduce({}) do |hash, elem|
+  g = g.each_with_object({}) do |elem, hash|
     hash[elem.to_s] = 0
-    hash
   end
   val_string = ''
   string_arr = []
@@ -109,9 +108,7 @@ def num_components(head, g)
       end
     end
 
-    if head.next.nil?
-      string_arr.push(val_string) unless val_string.empty?
-    end
+    string_arr.push(val_string) if head.next.nil? && !val_string.empty?
 
     head = head.next
   end

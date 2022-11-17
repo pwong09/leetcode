@@ -78,6 +78,7 @@ def hasCycle(head)
   end
   false
 end
+
 # refactor
 def cycle?(head)
   return false if !head || head.next.nil?
@@ -301,9 +302,7 @@ def largest_perimeter(nums)
   use_length = nums.length - 3
 
   for i in 0..use_length do
-    if nums[i + 2] + nums[i + 1] > nums[i]
-      return nums[i + 2] + nums[i + 1] + nums[i]
-    end
+    return nums[i + 2] + nums[i + 1] + nums[i] if nums[i + 2] + nums[i + 1] > nums[i]
   end
 
   0

@@ -3,7 +3,6 @@
 # @param {Integer} n
 # @return {Integer}
 
-
 # brute force approach - times out
 # def unique_paths(m, n)
 #   backtrack(0, 0, m, n)
@@ -86,6 +85,7 @@ def lowest_common_ancestor(root, p, q)
 
   !l_node.nil? ? l_node : r_node
 end
+
 # 98 Validate Binary Search Tree
 # Definition for a binary tree node.
 # class TreeNode
